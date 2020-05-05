@@ -18,8 +18,11 @@ const deleteTodo = function(todos, task) {
     }
 }
 
-console.log(todos)
-deleteTodo(todos, 'task2')
-console.log(todos)
-deleteTodo(todos, 'not there')
-console.log(todos)
+const getThingsToDo = function(todos) {
+    return todos.filter(function(item, index) {
+        return !item.completed
+    })
+}
+
+
+console.log(getThingsToDo(todos))
