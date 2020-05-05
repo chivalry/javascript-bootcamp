@@ -24,7 +24,9 @@ const account = {
             incomes += income.amount
         })
         const balance = incomes - expenses
-        return `${this.name} has a balance of $${balance}. $${incomes} in income. $${expenses} in expenses.`
+        let buf = `${this.name} has a balance of $${balance}.`
+        buf += `$${incomes} in income. $${expenses} in expenses.`
+        return buf
     },
 }
 
