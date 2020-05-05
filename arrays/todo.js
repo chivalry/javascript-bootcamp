@@ -1,9 +1,25 @@
-const todos = ['task1', 'task2', 'task3', 'task4', 'task5']
+const todos = [{
+    text: 'task1',
+    completed: false
+}, {
+    text: 'task2',
+    completed: true
+}, {
+    text: 'task3',
+    completed: false
+}]
 
-todos.splice(2, 1)
-todos.push('todo6')
-todos.shift()
-console.log(`you have ${todos.length} todos`)
-todos.forEach(function(item, index) {
-    console.log(`${index + 1}. ${item}`)
-})
+const deleteTodo = function(todos, task) {
+    index = todos.findIndex(function(item, index) {
+        return task.toLowerCase() === item.text.toLowerCase()
+    })
+    if (index >= 0) {
+        todos.splice(index, 1)
+    }
+}
+
+console.log(todos)
+deleteTodo(todos, 'task2')
+console.log(todos)
+deleteTodo(todos, 'not there')
+console.log(todos)
