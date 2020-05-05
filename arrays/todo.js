@@ -4,4 +4,6 @@ todos.splice(2, 1)
 todos.push('todo6')
 todos.shift()
 console.log(`you have ${todos.length} todos`)
-console.log(todos)
+todos.forEach(function(item, index) {
+    console.log(`${index + 1}. ${item}`)
+})
