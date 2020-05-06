@@ -27,6 +27,6 @@ todos.forEach(function(todo) {
     paragraph.textContent = todo.text
     body.appendChild(paragraph)
 })
-document.querySelector('button').addEventListener('click', function(event) {
+document.querySelector('#add-todo').addEventListener('click', function(event) {
     console.log('clicked')
 })

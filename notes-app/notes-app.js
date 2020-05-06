@@ -9,6 +9,12 @@ const notes = [{
     body: 'Get new chair'
 }]
 
-document.querySelector('button').addEventListener('click', function(event) {
-    event.target.textContent = 'Clicked'
+document.querySelector('#create-note').addEventListener('click', function(event) {
+    event.target.textContent = 'The button was clicked'
+})
+
+document.querySelector('#remove-all').addEventListener('click', function(event) {
+    document.querySelectorAll('.note').forEach(function(note) {
+        note.remove()
+    })
 })
