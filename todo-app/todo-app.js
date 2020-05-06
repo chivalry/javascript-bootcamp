@@ -18,7 +18,6 @@ const todos = [{
 const incomplete = todos.filter(function(todo) {
     return !todo.completed
 })
-console.log(incomplete)
 const summary = document.createElement('h2')
 summary.textContent = `You have ${incomplete.length} todos left`
 const body = document.querySelector('body')
@@ -27,4 +26,7 @@ todos.forEach(function(todo) {
     const paragraph = document.createElement('p')
     paragraph.textContent = todo.text
     body.appendChild(paragraph)
+})
+document.querySelector('button').addEventListener('click', function(event) {
+    console.log('clicked')
 })
