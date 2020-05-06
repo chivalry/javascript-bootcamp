@@ -1,3 +1,14 @@
+const notes = [{
+    title: 'My next trip',
+    body: 'I would like to go to Spain'
+}, {
+    title: 'Habbits to work on',
+    body: 'Exercise'
+}, {
+    title: 'Office modifications',
+    body: 'Get new chair'
+}]
+
 // const p = document.querySelector('p')
 // p.remove()
 
@@ -7,3 +18,7 @@ ps.forEach(function(p) {
     // console.log(p.textContent)
     // p.remove()
 })
+
+const newParagraph = document.createElement('p')
+newParagraph.textContent = 'This is a new element from JavaScript'
+document.querySelector('body').appendChild(newParagraph)
