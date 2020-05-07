@@ -18,7 +18,7 @@ const removeNote = function(id) {
 
 const generateNoteDOM = function(note) {
     const noteElement = document.createElement('div')
-    const textElement = document.createElement('span')
+    const linkElement = document.createElement('a')
     const button = document.createElement('button')
     button.textContent = 'x'
     noteElement.appendChild(button)
@@ -27,8 +27,9 @@ const generateNoteDOM = function(note) {
         saveNotes(notes)
         renderNotes(notes, filters)
     })
-    textElement.textContent = note.title.length > 0 ? note.title : 'Unnamed note'
-    noteElement.appendChild(textElement)
+    linkElement.textContent = note.title.length > 0 ? note.title : 'Unnamed note'
+    linkElement.setAttribute('href', `/edit.html#${note.id}`)
+    noteElement.appendChild(linkElement)
     return noteElement
 }
 
