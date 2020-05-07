@@ -16,7 +16,8 @@ const todos = [{
 }]
 
 const filters = {
-    searchString: ''
+    searchString: '',
+    hideCompleted: false
 }
 
 const renderTodos = function(todos, filters) {
@@ -32,9 +33,11 @@ const renderTodos = function(todos, filters) {
     summary.textContent = `You have ${count} todos left`
     todoDiv.appendChild(summary)
     filteredTodos.forEach(function(todo) {
-        const paragraph = document.createElement('p')
-        paragraph.textContent = todo.text
-        document.querySelector('#todos').appendChild(paragraph)
+        if (todo.completed || !filters.hideCompleted) {
+            const paragraph = document.createElement('p')
+            paragraph.textContent = todo.text
+            todoDiv.appendChild(paragraph)
+        }
     })
 }
 
@@ -53,4 +56,9 @@ document.querySelector('#new-todo-form').addEventListener('submit', function(eve
     })
     renderTodos(todos, filters)
     event.target.elements.todo.value = ''
+})
+
+document.querySelector('#hide-completed-checkbox').addEventListener('change', function(event) {
+    filters.hideCompleted = event.target.checked
+    renderTodos(todos, filters)
 })
