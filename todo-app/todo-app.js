@@ -1,34 +1,8 @@
-let todos = []
+const todos = getSavedTodos()
 
 const filters = {
     searchString: '',
     hideCompleted: false
-}
-
-const todosJSON = localStorage.getItem('todos')
-if (todosJSON) {
-    todos = JSON.parse(todosJSON)
-}
-
-const renderTodos = function(todos, filters) {
-    const todoDiv = document.querySelector('#todos')
-    todoDiv.innerHTML = ''
-    const filteredTodos = todos.filter(function(todo) {
-        return todo.text.toLowerCase().includes(filters.searchString.toLowerCase())
-    })
-    const count = filteredTodos.filter(function(todo) {
-        return !todo.completed
-    }).length
-    const summary = document.createElement('h2')
-    summary.textContent = `You have ${count} todos left`
-    todoDiv.appendChild(summary)
-    filteredTodos.forEach(function(todo) {
-        if (todo.completed || !filters.hideCompleted) {
-            const paragraph = document.createElement('p')
-            paragraph.textContent = todo.text
-            todoDiv.appendChild(paragraph)
-        }
-    })
 }
 
 renderTodos(todos, filters)
@@ -44,7 +18,7 @@ document.querySelector('#new-todo-form').addEventListener('submit', function(eve
         text: event.target.elements.todo.value,
         completed: false
     })
-    localStorage.setItem('todos', JSON.stringify(todos))
+    saveTodos(todos)
     renderTodos(todos, filters)
     event.target.elements.todo.value = ''
 })
