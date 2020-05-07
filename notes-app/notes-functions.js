@@ -1,3 +1,4 @@
+console.log(uuidv4())
 const getSavedNotes = function() {
     const notesJSON = localStorage.getItem('notes')
     if (notesJSON !== null) {

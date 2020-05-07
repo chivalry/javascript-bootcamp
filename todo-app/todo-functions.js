@@ -11,9 +11,6 @@ const generateTodoDOM = function(todo) {
     const todoElement = document.createElement('div')
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
-    if (todo.completed) {
-        checkbox.setAttribute('checked', 'checked')
-    }
     todoElement.appendChild(checkbox)
     const paragraph = document.createElement('span')
     paragraph.textContent = todo.text
