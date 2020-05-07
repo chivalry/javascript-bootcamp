@@ -8,9 +8,20 @@ const saveTodos = function(todos) {
 }
 
 const generateTodoDOM = function(todo) {
-    const paragraph = document.createElement('p')
+    const todoElement = document.createElement('div')
+    const checkbox = document.createElement('input')
+    checkbox.setAttribute('type', 'checkbox')
+    if (todo.completed) {
+        checkbox.setAttribute('checked', 'checked')
+    }
+    todoElement.appendChild(checkbox)
+    const paragraph = document.createElement('span')
     paragraph.textContent = todo.text
-    return paragraph
+    todoElement.appendChild(paragraph)
+    const button = document.createElement('button')
+    button.textContent = 'x'
+    todoElement.appendChild(button)
+    return todoElement
 }
 
 const generateSummaryDOM = function(todos) {

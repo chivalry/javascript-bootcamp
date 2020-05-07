@@ -8,12 +8,13 @@ const getSavedNotes = function() {
 }
 
 const generateNoteDOM = function(note) {
-    const noteElement = document.createElement('p')
-    if (note.title.length > 0) {
-        noteElement.textContent = note.title
-    } else {
-        noteElement.textContent = 'Unnamed Note'
-    }
+    const noteElement = document.createElement('div')
+    const textElement = document.createElement('span')
+    const button = document.createElement('button')
+    button.textContent = 'x'
+    noteElement.appendChild(button)
+    textElement.textContent = note.title.length > 0 ? note.title : 'Unnamed note'
+    noteElement.appendChild(textElement)
     return noteElement
 }
 
