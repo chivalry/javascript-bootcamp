@@ -1,4 +1,3 @@
-console.log(uuidv4())
 const getSavedNotes = function() {
     const notesJSON = localStorage.getItem('notes')
     if (notesJSON !== null) {
@@ -8,12 +7,26 @@ const getSavedNotes = function() {
     }
 }
 
+const removeNote = function(id) {
+    const index = notes.findIndex(function(note) {
+        return note.id === id
+    })
+    if (index > -1) {
+        notes.splice(index, 1)
+    }
+}
+
 const generateNoteDOM = function(note) {
     const noteElement = document.createElement('div')
     const textElement = document.createElement('span')
     const button = document.createElement('button')
     button.textContent = 'x'
     noteElement.appendChild(button)
+    button.addEventListener('click', function(event) {
+        removeNote(note.id)
+        saveNotes(notes)
+        renderNotes(notes, filters)
+    })
     textElement.textContent = note.title.length > 0 ? note.title : 'Unnamed note'
     noteElement.appendChild(textElement)
     return noteElement
