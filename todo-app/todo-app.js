@@ -15,21 +15,40 @@ const todos = [{
     completed: true
 }]
 
-const incomplete = todos.filter(function(todo) {
-    return !todo.completed
-})
-const summary = document.createElement('h2')
-summary.textContent = `You have ${incomplete.length} todos left`
-const body = document.querySelector('body')
-body.appendChild(summary)
-todos.forEach(function(todo) {
-    const paragraph = document.createElement('p')
-    paragraph.textContent = todo.text
-    body.appendChild(paragraph)
-})
+const filters = {
+    searchString: ''
+}
+
+const renderTodos = function(todos, filters) {
+    const todoDiv = document.querySelector('#todos')
+    todoDiv.innerHTML = ''
+    const filteredTodos = todos.filter(function(todo) {
+        return todo.text.toLowerCase().includes(filters.searchString.toLowerCase())
+    })
+    const count = filteredTodos.filter(function(todo) {
+        return !todo.completed
+    }).length
+    const summary = document.createElement('h2')
+    summary.textContent = `You have ${count} todos left`
+    todoDiv.appendChild(summary)
+    filteredTodos.forEach(function(todo) {
+        const paragraph = document.createElement('p')
+        paragraph.textContent = todo.text
+        document.querySelector('#todos').appendChild(paragraph)
+    })
+}
+
+renderTodos(todos, filters)
+
 document.querySelector('#add-todo').addEventListener('click', function(event) {
     console.log('clicked')
 })
+
 document.querySelector('#new-todo').addEventListener('input', function(event) {
     console.log(event.target.value)
+})
+
+document.querySelector('#search-text').addEventListener('input', function(event) {
+    filters.searchString = event.target.value
+    renderTodos(todos, filters)
 })

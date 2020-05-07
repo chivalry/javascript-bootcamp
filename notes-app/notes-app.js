@@ -14,7 +14,7 @@ const filters = {
 }
 
 const renderNotes = function(notes, filters) {
-    const filteredNotes = notes.filter(function (note) {
+    const filteredNotes = notes.filter(function(note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
     document.querySelector('#notes').innerHTML = ''
