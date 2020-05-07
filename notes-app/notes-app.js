@@ -31,13 +31,13 @@ document.querySelector('#create-note').addEventListener('click', function(event)
     event.target.textContent = 'The button was clicked'
 })
 
-document.querySelector('#remove-all').addEventListener('click', function(event) {
-    document.querySelectorAll('.note').forEach(function(note) {
-        note.remove()
-    })
-})
-
 document.querySelector('#search-text').addEventListener('input', function(event) {
     filters.searchText = event.target.value
     renderNotes(notes, filters)
+})
+
+document.querySelector('#name-form').addEventListener('submit', function(event) {
+    event.preventDefault()
+    console.log(event.target.elements.firstName.value)
+    event.target.elements.firstName.value = ''
 })
