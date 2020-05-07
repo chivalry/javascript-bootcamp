@@ -30,3 +30,6 @@ todos.forEach(function(todo) {
 document.querySelector('#add-todo').addEventListener('click', function(event) {
     console.log('clicked')
 })
+document.querySelector('#new-todo').addEventListener('input', function(event) {
+    console.log(event.target.value)
+})
