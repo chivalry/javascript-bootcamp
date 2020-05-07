@@ -16,10 +16,25 @@ const removeTodo = function(id) {
     }
 }
 
+const toggleTodo = function(id) {
+    const todo = todos.find(function(todo) {
+        return todo.id === id
+    })
+    if (todo) {
+        todo.completed = !todo.completed
+    }
+}
+
 const generateTodoDOM = function(todo) {
     const todoElement = document.createElement('div')
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
+    checkbox.checked = todo.completed
+    checkbox.addEventListener('change', function(event) {
+        toggleTodo(todo.id)
+        saveTodos(todos)
+        renderTodos(todos, filters)
+    })
     todoElement.appendChild(checkbox)
     const paragraph = document.createElement('span')
     paragraph.textContent = todo.text
@@ -29,7 +44,7 @@ const generateTodoDOM = function(todo) {
     todoElement.appendChild(button)
     button.addEventListener('click', function(event) {
         removeTodo(todo.id)
-        saveTodos()
+        saveTodos(todos)
         renderTodos(todos, filters)
     })
     return todoElement
@@ -52,7 +67,7 @@ const renderTodos = function(todos, filters) {
     })
     todoDiv.appendChild(generateSummaryDOM(filteredTodos))
     filteredTodos.forEach(function(todo) {
-        if (todo.completed || !filters.hideCompleted) {
+        if (!todo.completed || !filters.hideCompleted) {
             todoDiv.appendChild(generateTodoDOM(todo))
         }
     })
