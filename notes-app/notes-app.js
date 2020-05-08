@@ -1,4 +1,4 @@
-const notes = getSavedNotes()
+let notes = getSavedNotes()
 
 const filters = {
     searchText: ''
@@ -24,4 +24,11 @@ document.querySelector('#search-text').addEventListener('input', function(event)
 
 document.querySelector('#filter-by').addEventListener('change', function(event) {
     console.log(event.target.value)
+})
+
+window.addEventListener('storage', function(event) {
+    if (event.key === 'notes') {
+        notes = getSavedNotes()
+        renderNotes(notes, filters)
+    }
 })
