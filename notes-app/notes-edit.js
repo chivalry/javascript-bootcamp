@@ -1,7 +1,7 @@
 const noteID = location.hash.substr(1)
 let notes = getSavedNotes()
 let note = notes.find((note) => note.id === noteID)
-if (note === undefined) {
+if (!note) {
     location.assign('/index.html')
 }
 
@@ -37,7 +37,7 @@ window.addEventListener('storage', (event) => {
     if (event.key === 'notes') {
         notes = JSON.parse(event.newValue)
         note = notes.find((note) => note.id === noteID)
-        if (note === undefined) {
+        if (!note) {
             location.assign('/index.html')
         }
         titleField.value = note.title
