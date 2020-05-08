@@ -32,3 +32,9 @@ window.addEventListener('storage', function(event) {
         renderNotes(notes, filters)
     }
 })
+
+const birthday = moment()
+birthday.month('June')
+birthday.date(16)
+birthday.year(1971)
+console.log(birthday.format('MMM D, YYYY'))
