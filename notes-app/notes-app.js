@@ -7,11 +7,14 @@ const filters = {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function(event) {
-    id = uuidv4()
+    const id = uuidv4()
+    const timestamp = moment().valueOf()
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: timestamp,
+        updatedAt: timestamp
     })
     saveNotes(notes)
     location.assign(`/edit.html#${id}`)
@@ -32,9 +35,3 @@ window.addEventListener('storage', function(event) {
         renderNotes(notes, filters)
     }
 })
-
-const birthday = moment()
-birthday.month('June')
-birthday.date(16)
-birthday.year(1971)
-console.log(birthday.format('MMM D, YYYY'))

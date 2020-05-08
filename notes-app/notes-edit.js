@@ -7,10 +7,15 @@ if (note === undefined) {
     location.assign('/index.html')
 }
 
+editedSpan = document.querySelector('#last-edited')
+editedSpan.textContent = generateLastEdited(note.updatedAt)
+
 titleField = document.querySelector('#note-title')
 titleField.value = note.title
 titleField.addEventListener('input', function(event) {
     note.title = titleField.value
+    note.updatedAt = moment().valueOf()
+    editedSpan.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
@@ -18,6 +23,8 @@ bodyField = document.querySelector('#note-body')
 bodyField.value = note.body
 bodyField.addEventListener('input', function(event) {
     note.body = bodyField.value
+    note.updatedAt = moment().valueOf()
+    editedSpan.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
@@ -39,5 +46,6 @@ window.addEventListener('storage', function(event) {
         }
         titleField.value = note.title
         bodyField.value = note.body
+        editedSpan.textContent = generateLastEdited(note.updatedAt)
     }
 })
