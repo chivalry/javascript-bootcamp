@@ -1,4 +1,7 @@
 const grade = function(score, possible) {
+    if (typeof score !== 'number' || typeof possible !== 'number') {
+        throw Error('arguments must be numbers')
+    }
     const percent = score / possible * 100;
     let grade = null;
     if (percent < 60) {
@@ -17,3 +20,8 @@ const grade = function(score, possible) {
 }
 
 console.log(grade(75, 100));
+try {
+    console.log(grade(true, 100))
+} catch (error) {
+    console.log(error.message)
+}
