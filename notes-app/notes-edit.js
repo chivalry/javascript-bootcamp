@@ -1,8 +1,6 @@
 const noteID = location.hash.substr(1)
 let notes = getSavedNotes()
-let note = notes.find(function(note) {
-    return note.id === noteID
-})
+let note = notes.find((note) => note.id === noteID)
 if (note === undefined) {
     location.assign('/index.html')
 }
@@ -12,7 +10,7 @@ editedSpan.textContent = generateLastEdited(note.updatedAt)
 
 titleField = document.querySelector('#note-title')
 titleField.value = note.title
-titleField.addEventListener('input', function(event) {
+titleField.addEventListener('input', (event) => {
     note.title = titleField.value
     note.updatedAt = moment().valueOf()
     editedSpan.textContent = generateLastEdited(note.updatedAt)
@@ -21,7 +19,7 @@ titleField.addEventListener('input', function(event) {
 
 bodyField = document.querySelector('#note-body')
 bodyField.value = note.body
-bodyField.addEventListener('input', function(event) {
+bodyField.addEventListener('input', (event) => {
     note.body = bodyField.value
     note.updatedAt = moment().valueOf()
     editedSpan.textContent = generateLastEdited(note.updatedAt)
@@ -29,18 +27,16 @@ bodyField.addEventListener('input', function(event) {
 })
 
 removeButton = document.querySelector('#remove-note')
-removeButton.addEventListener('click', function(event) {
+removeButton.addEventListener('click', (event) => {
     removeNote(note.id)
     saveNotes(notes)
     location.assign('/index.html')
 })
 
-window.addEventListener('storage', function(event) {
+window.addEventListener('storage', (event) => {
     if (event.key === 'notes') {
         notes = JSON.parse(event.newValue)
-        note = notes.find(function(note) {
-            return note.id === noteID
-        })
+        note = notes.find((note) => note.id === noteID)
         if (note === undefined) {
             location.assign('/index.html')
         }
