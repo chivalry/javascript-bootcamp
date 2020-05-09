@@ -10,18 +10,14 @@ window.addEventListener('keypress', function (event) {
 })
 
 
-getPuzzle(2, (error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else {
-        console.log(puzzle)
-    }
+getPuzzle(2).then((puzzle) => {
+    console.log(puzzle)
+}, (err) => {
+    console.log(`Error: ${err}`)
 })
 
-const country = getCountry('MX', (error, country) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else {
-        console.log(country.name)
-    }
+getCountry('MX').then((country) => {
+    console.log(country.name)
+}, (err) => {
+    console.log(err)
 })
