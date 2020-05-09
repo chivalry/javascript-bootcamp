@@ -20,3 +20,14 @@ request.addEventListener('readystatechange', (event) => {
 })
 request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
 request.send()
+
+const usReq = new XMLHttpRequest()
+usReq.addEventListener('readystatechange', (event) => {
+    if (event.target.readyState === 4 && event.target.status === 200) {
+        const countries = JSON.parse(event.target.responseText)
+        const country = countries.find((country) => country.alpha2Code === 'US')
+        console.log(country.name)
+    }
+})
+usReq.open('GET', 'http://restcountries.eu/rest/v2/all')
+usReq.send()
