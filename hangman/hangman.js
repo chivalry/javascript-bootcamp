@@ -7,7 +7,7 @@ class Hangman {
         this.updateStatus()
     }
 
-    getPuzzle() {
+    get puzzle() {
         let buf = ''
         this.word.forEach((letter) => buf += letter === ' ' ? ' ' : this.letters.includes(letter) ? letter : '*')
         return buf
@@ -37,7 +37,7 @@ class Hangman {
         }
     }
 
-    statusMessage() {
+    get statusMessage() {
         if (this.status == 'playing') {
             return `Guesses left: ${this.count}`
         } else if (this.status == 'failed') {
