@@ -32,7 +32,7 @@ class Hangman {
         if (this.count === 0) {
             this.status = 'failed'
         } else {
-            const finished = this.word.every((letter) => this.letters.includes(letter))
+            const finished = this.word.every((letter) => this.letters.includes(letter) || letter === ' ')
             this.status = finished ? 'finished' : this.status
         }
     }

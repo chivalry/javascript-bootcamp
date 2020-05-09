@@ -1,4 +1,4 @@
-const game = new Hangman('cat', 2)
+const game = new Hangman('car parts', 2)
 const puzzle = document.querySelector('#puzzle')
 const count = document.querySelector('#count')
 puzzle.textContent = game.puzzle
