@@ -17,6 +17,9 @@ getPuzzle((error, puzzle) => {
         console.log(puzzle)
     }
 })
+console.log('do something else')
+const puzz = getPuzzleSync()
+console.log(puzz)
 
 // const usReq = new XMLHttpRequest()
 // usReq.addEventListener('readystatechange', (event) => {
