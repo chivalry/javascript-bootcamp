@@ -36,10 +36,10 @@ getDataPromise(2).then((data) => {
     console.log(err)
 })
 
-getDataPromise('10').then((data) => {
+getDataPromise(10).then((data) => {
     return getDataPromise(data)
 }).then((data) => {
-    return getDataPromise(data)
+    return 'test data'
 }).then((data) => {
     console.log(data)
 }).catch((err) => {
