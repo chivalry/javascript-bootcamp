@@ -1,26 +1,37 @@
-const game = new Hangman('car parts', 2)
+let game
 const puzzle = document.querySelector('#puzzle')
 const count = document.querySelector('#count')
-puzzle.textContent = game.puzzle
-count.textContent = game.statusMessage
+
 window.addEventListener('keypress', function (event) {
     game.guess(event.key)
+    render()
+})
+
+const render = () => {
     puzzle.textContent = game.puzzle
     count.textContent = game.statusMessage
-})
+}
 
+const startGame = async () => {
+    const puzzle = await getPuzzle(2)
+    game = new Hangman(puzzle, 5)
+    render()
+}
 
-getPuzzle(2).then((puzzle) => {
-    console.log(puzzle)
-}).catch((err) => {
-    console.log(`Error: ${err}`)
-})
+document.querySelector('#reset').addEventListener('click', startGame)
+startGame()
 
-getCurrentCountry().then((country) => {
-    console.log(country.name)
-}).catch((error) => {
-    console.log(error)
-})
+// getPuzzle(2).then((puzzle) => {
+//     console.log(puzzle)
+// }).catch((err) => {
+//     console.log(`Error: ${err}`)
+// })
+
+// getCurrentCountry().then((country) => {
+//     console.log(country.name)
+// }).catch((error) => {
+//     console.log(error)
+// })
 
 // getLocation().then((location) => {
 //     return getCountry(location.country)
