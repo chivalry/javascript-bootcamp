@@ -17,3 +17,13 @@ const getCountry = (code) => {
         }
     }).then((countries) => countries.find((country) => country.alpha2Code === code))
 }
+
+const getLocation = () => {
+    return fetch('http://ipinfo.io/json?token=02d1730f810de2').then((response) => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw new Error('Unable to fetch location')
+        }
+    })
+}

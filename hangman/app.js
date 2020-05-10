@@ -16,7 +16,9 @@ getPuzzle(2).then((puzzle) => {
     console.log(`Error: ${err}`)
 })
 
-getCountry('US').then((country) => {
+getLocation().then((location) => {
+    return getCountry(location.country)
+}).then((country) => {
     console.log(country.name)
 }).catch((err) => {
     console.log(`Error: ${err}`)
