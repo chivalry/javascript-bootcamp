@@ -8,7 +8,12 @@ window.addEventListener('keypress', function (event) {
 })
 
 const render = () => {
-    puzzle.textContent = game.puzzle
+    puzzle.innerHTML = ''
+    game.puzzle.split('').forEach((letter) => {
+        const span = document.createElement('span')
+        span.textContent = letter
+        puzzle.appendChild(span)
+    })
     count.textContent = game.statusMessage
 }
 
