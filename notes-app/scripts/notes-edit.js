@@ -7,10 +7,10 @@ if (!note) {
     location.assign('/index.html')
 }
 
-editedSpan = document.querySelector('#last-edited')
+const editedSpan = document.querySelector('#last-edited')
 editedSpan.textContent = generateLastEdited(note.updatedAt)
 
-titleField = document.querySelector('#note-title')
+const titleField = document.querySelector('#note-title')
 titleField.value = note.title
 titleField.addEventListener('input', (event) => {
     note.title = titleField.value
@@ -19,7 +19,7 @@ titleField.addEventListener('input', (event) => {
     saveNotes(notes)
 })
 
-bodyField = document.querySelector('#note-body')
+const bodyField = document.querySelector('#note-body')
 bodyField.value = note.body
 bodyField.addEventListener('input', (event) => {
     note.body = bodyField.value
@@ -28,7 +28,7 @@ bodyField.addEventListener('input', (event) => {
     saveNotes(notes)
 })
 
-removeButton = document.querySelector('#remove-note')
+const removeButton = document.querySelector('#remove-note')
 removeButton.addEventListener('click', (event) => {
     removeNote(note.id)
     saveNotes(notes)
