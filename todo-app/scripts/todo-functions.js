@@ -30,34 +30,46 @@ const toggleTodo = (id) => {
 }
 
 const generateTodoDOM = (todo) => {
-    const todoElement = document.createElement('div')
+    const todoEl = document.createElement('label')
+    const containerEl = document.createElement('div')
     const checkbox = document.createElement('input')
+    const todoText = document.createElement('span')
+
+    const removeButton = document.createElement('button')
     checkbox.setAttribute('type', 'checkbox')
     checkbox.checked = todo.completed
-    checkbox.addEventListener('change', (event) => {
+    containerEl.appendChild(checkbox)
+    checkbox.addEventListener('change', () => {
         toggleTodo(todo.id)
         saveTodos(todos)
         renderTodos(todos, filters)
     })
-    todoElement.appendChild(checkbox)
-    const paragraph = document.createElement('span')
-    paragraph.textContent = todo.text
-    todoElement.appendChild(paragraph)
-    const button = document.createElement('button')
-    button.textContent = 'x'
-    todoElement.appendChild(button)
-    button.addEventListener('click', (event) => {
+
+    todoText.textContent = todo.text
+    containerEl.appendChild(todoText)
+
+    todoEl.classList.add('list-item')
+    containerEl.classList.add('list-item__container')
+    todoEl.appendChild(containerEl)
+
+    removeButton.textContent = 'Remove'
+    removeButton.classList.add('button', 'button--text')
+    todoEl.appendChild(removeButton)
+    removeButton.addEventListener('click', () => {
         removeTodo(todo.id)
         saveTodos(todos)
         renderTodos(todos, filters)
     })
-    return todoElement
+
+    return todoEl
 }
 
 const generateSummaryDOM = (todos) => {
     const count = todos.filter((todo) => !todo.completed ).length
+    const noun = count === 1 ? 'todo' : 'todos'
     const summary = document.createElement('h2')
-    summary.textContent = `You have ${count} todos left`
+    summary.classList.add('list-title')
+    summary.textContent = `You have ${count} ${noun} left`
     return summary
 }
 
@@ -66,9 +78,16 @@ const renderTodos = (todos, filters) => {
     todoDiv.innerHTML = ''
     const filteredTodos = todos.filter((todo) => todo.text.toLowerCase().includes(filters.searchString.toLowerCase()))
     todoDiv.appendChild(generateSummaryDOM(filteredTodos))
-    filteredTodos.forEach((todo) => {
-        if (!todo.completed || !filters.hideCompleted) {
-            todoDiv.appendChild(generateTodoDOM(todo))
-        }
-    })
+    if (filteredTodos.length === 0) {
+        const paragraph = document.createElement('p')
+        paragraph.classList.add('empty-message')
+        paragraph.textContent = 'No to-dos to show'
+        todoDiv.appendChild(paragraph)
+    } else {
+        filteredTodos.forEach((todo) => {
+            if (!todo.completed || !filters.hideCompleted) {
+                todoDiv.appendChild(generateTodoDOM(todo))
+            }
+        })
+    }
 }
