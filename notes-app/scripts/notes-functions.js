@@ -17,19 +17,17 @@ const removeNote = (id) => {
 }
 
 const generateNoteDOM = (note) => {
-    const noteElement = document.createElement('div')
-    const linkElement = document.createElement('a')
-    const button = document.createElement('button')
-    button.textContent = 'x'
-    noteElement.appendChild(button)
-    button.addEventListener('click', (event) => {
-        removeNote(note.id)
-        saveNotes(notes)
-        renderNotes(notes, filters)
-    })
+    const noteElement = document.createElement('a')
+    const linkElement = document.createElement('p')
+    const status = document.createElement('p')
     linkElement.textContent = note.title.length > 0 ? note.title : 'Unnamed note'
-    linkElement.setAttribute('href', `/edit.html#${note.id}`)
+    linkElement.classList.add('list-item__title')
     noteElement.appendChild(linkElement)
+    noteElement.setAttribute('href', `edit.html#${note.id}`)
+    noteElement.classList.add('list-item')
+    status.textContent = generateLastEdited(note.updatedAt)
+    status.classList.add('list-item__subtitle')
+    noteElement.appendChild(status)
     return noteElement
 }
 
@@ -72,11 +70,20 @@ const sortNotes = (notes, sortBy) => {
 const renderNotes = (notes, filters) => {
     notes = sortNotes(notes, filters.sortBy)
     const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
-    document.querySelector('#notes').innerHTML = ''
-    filteredNotes.forEach((note) => {
-        const noteElement = generateNoteDOM(note)
-        document.querySelector('#notes').appendChild(noteElement)
-    })
+    const notesEl = document.querySelector('#notes')
+    notesEl.innerHTML = ''
+    if (filteredNotes.length > 0 ) {
+        filteredNotes.forEach((note) => {
+            const noteElement = generateNoteDOM(note)
+            notesEl.appendChild(noteElement)
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No notes to show'
+        emptyMessage.classList.add('empty-message')
+        notesEl.appendChild(emptyMessage)
+    }
+
 }
 
 const saveNotes = (notes) => {
