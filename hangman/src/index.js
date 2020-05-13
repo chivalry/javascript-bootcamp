@@ -1,5 +1,8 @@
+import uuidv4 from 'uuid/v4'
 import Hangman from './hangman'
 import getPuzzle from './requests'
+
+console.log(uuidv4())
 
 let game
 const puzzle = document.querySelector('#puzzle')
